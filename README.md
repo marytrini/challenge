@@ -27,22 +27,34 @@ This is a simple web application for creating, archiving, and reading notes. It 
 1. **Clone the Repository and Run the Setup Script**
 
    ```bash
-   git clone https://github.com/ensolvers-github-challenges/Salazar-c836e0.git
-   cd Salazar
-   chmod +x start.sh
-   ./start.sh
+   git clone https://github.com/marytrini/challenge.git
+   cd challenge
+   chmod +x setup.sh
+   ./setup.sh
 
 This script will:
+- Download and install Node.js
+- Install Git
+- Install Postgresql and set up the database
 - Clone the repository
 - Install backend and frontend dependencies
-- Set up the Postgresql database
-- Run the backend and frontend servers
+
+After the setup is complete you may proceed to start the backend server and the frontend server:
+
+- Navigate to /challenge/backend and execute the script:
+    - npm run dev (for development)
+    - or npm start
+
+- Navigate to /challenge/frontend and execute the script:
+    - npm start
+
+And now you have completed the process to run this app successfully!
 
 ### Manual Setup
 
 1. **Clone the Repository**
-git clone https://github.com/ensolvers-github-challenges/Salazar-c836e0.git
-cd Salazar
+git clone https://github.com/marytrini/challenge.git
+cd challenge
 
 2. **Backend Setup**
 - Navigate to the backend directory and install dependencies:
