@@ -18,22 +18,19 @@ const NotesItem = ({note, onEdit, onDelete, onArchive, onActive}) => {
       </div>
       {
         isOpen && (
-         <div className='flex flex-wrap content-center '>
-          <div className='flex'>
+         <div>
+          <div className='block'>
+            <p className='font-pop'>{note.message}</p>
+          </div>
+          <div className='flex flex-wrap justify-center mt-2'>
           <button className='rounded-lg border-2 border-solid border-rose-600 font-pop font-semibold hover:bg-rose-400 hover:text-white p-1 mr-3' onClick={handleEdit}>Edit</button>
-          </div>
-          <div>
           <button className='rounded-lg border-2 border-solid border-rose-600 font-pop font-semibold hover:bg-rose-400 hover:text-white p-1 mr-3' onClick={handleDelete}>Delete</button>
-          </div>
-          <div>
           <button className='rounded-lg border-2 border-solid border-rose-600 font-pop font-semibold hover:bg-rose-400 hover:text-white p-1 mr-3' onClick={handleActive}>
           {
             note.active ? 'Inactive' : 'Active'
           }
         </button>
-          </div>
-          <div>
-          <button className='rounded-lg border-2 border-solid border-rose-600 font-pop font-semibold hover:bg-rose-400 hover:text-white p-1 mr-3' onClick={handleArchive}>
+        <button className='rounded-lg border-2 border-solid border-rose-600 font-pop font-semibold hover:bg-rose-400 hover:text-white p-1 mr-3' onClick={handleArchive}>
           {note.archive ? 'Unarchive' : 'Archive'}
         </button>
           </div>

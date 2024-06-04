@@ -3,7 +3,7 @@ import Header from '../../components/header/Header'
 import { Link } from 'react-router-dom'
 const Home = () => {
   return (
-    <div className='min-h-screen flex flex-col bg-rose-50'>
+    <div className='min-h-screen flex flex-col'>
       <div className='flex-shrink-0 '>
         <Header />
       </div>

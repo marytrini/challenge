@@ -2,6 +2,7 @@ import React,{useState, useEffect} from 'react'
 import axios from 'axios'
 import NotesItem from '../../components/noteItem/NotesItem';
 import Form from '../../components/form/Form';
+import ButtonHome from '../../components/button/ButtonHome';
 
 const NotesList = () => {
   const [noteList, setNotesList]  = useState([]);
@@ -100,6 +101,9 @@ const NotesList = () => {
 
   return (
     <div>
+      <div className='flex items-start ml-5'>
+        <ButtonHome />
+      </div>
       <div className='grid grid-cols-1 2xl:grid-cols-2 gap-5 sm:flex flex-wrap mt-20'>
       <div className='2xl:col-span-1'>
       {

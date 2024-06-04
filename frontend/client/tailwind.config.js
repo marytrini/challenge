@@ -6,7 +6,10 @@ module.exports = {
       fontFamily: {
         pop: ['Poppins', 'sans-serif'],
         merienda: ['Merienda', 'cursive']
-      }
+      },
+      backgroundImage : {
+        'custom-bg': "url('./assets/images/bgImage.png')",
+      },
     },
     screens: {
       '2xl': {'max': '1920px'},

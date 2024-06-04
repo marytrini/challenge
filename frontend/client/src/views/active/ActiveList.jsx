@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
+import ButtonHome from '../../components/button/ButtonHome'
 
 const ActiveList = () => {
   const [active, setActive] = useState([]);
@@ -34,21 +35,24 @@ const ActiveList = () => {
   }
 
   return (
-    <div className='min-h-screen flex flex-col bg-rose-50'>
-      <div className='w-full h-fit mt-20'>
-        <h1 className='font-merienda font-black lg:text-8xl sm:text-6xl'>Active Notes List</h1>
+    <div className='min-h-screen flex flex-col '>
+      <div className='w-full h-fit mt-20 mb-10'>
+        <h1 className='font-merienda font-black lg:text-8xl sm:text-6xl'><span className='text-rose-600'>Active</span> Notes</h1>
       </div>
       <ul>
         {
           active.map((item, index) => 
           <li key={index}>
-            <div className='flex flex-col items-center gap-5 mt-2 ml-2'>
-              <h6 className='font-pop 2xl:flex items-center gap-2 mt-3 flex-wrap mb-0 sm:block'><span><i className="ri-check-line text-rose-600"></i></span>{item.title}</h6>
+            <div className='flex items-start gap-5 mt-2 w-full 2xl:ml-[600px] sm:ml-60'>
+              <h6 className='font-pop 2xl:flex text-left 2xl:text-xl sm:text-lg'><span><i className="ri-check-line text-rose-600"></i></span>{item.title}</h6>
             </div>
           </li>
           )
         }
       </ul>
+      <div>
+        <ButtonHome />
+      </div>
     </div>
   )
 }

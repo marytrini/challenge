@@ -8,7 +8,7 @@ import ActiveList from "../src/views/active/ActiveList"
 
 function App() {
   return (
-    <div className="App">
+    <div className="App bg-custom-bg bg-contain bg-center h-screen">
       <Routes>
         <Route path='/' element={<Home />}/>
         <Route path='/notes' element={<NotesList />}/>
