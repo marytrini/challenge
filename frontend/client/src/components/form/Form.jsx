@@ -2,7 +2,7 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 
-const Form = ({note, onSave, onCancel}) => {
+const Form = ({note, onSave}) => {
     const [input, setInput] = useState({
         title : '',
         message: '',
@@ -24,6 +24,13 @@ const Form = ({note, onSave, onCancel}) => {
         })
     }
 
+    const handleReset = () => {
+        setInput({
+            title: '',
+            message: '',
+        })
+    }
+
     const handleSubmit = async (event) => {
         event.preventDefault();
 
@@ -35,11 +42,21 @@ const Form = ({note, onSave, onCancel}) => {
         
             try {
                  if(note) {
-                    await axios.put(`http://localhost:4000/notes/create${note.id}`, input);
+                    await axios.put(`http://localhost:4000/notes/${note.id}`, input);
+                setSuccess('note updated successfully!')    
+                setInput({
+                    title:'',
+                    message:'',
+                })
+                onSave();
                  }else{
                     await axios.post('http://localhost:4000/notes/create', input);
-                onSave();
+                
                 setSuccess('note created successfully!')
+                setInput({
+                    title:'',
+                    message:'',
+                })
                  }
             } catch (error) {
              setError(error.message);
@@ -75,7 +92,7 @@ const Form = ({note, onSave, onCancel}) => {
             </div>
             <div>
                 <button className='rounded-lg border-2 border-solid border-rose-600 font-pop font-semibold hover:bg-rose-400 hover:text-white p-1 mr-3' type='submit'>Create</button>
-                <button className='rounded-lg border-2 border-solid border-rose-600 font-pop font-semibold hover:bg-rose-400 hover:text-white p-1' type='button' onClick={onCancel}>Cancel</button>
+                <button className='rounded-lg border-2 border-solid border-rose-600 font-pop font-semibold hover:bg-rose-400 hover:text-white p-1' type='reset' onClick={handleReset}>Cancel</button>
             </div>
         </form>
     </div>

@@ -3,12 +3,15 @@ import axios from 'axios'
 import NotesItem from '../../components/noteItem/NotesItem';
 import Form from '../../components/form/Form';
 import ButtonHome from '../../components/button/ButtonHome';
+import Modal from '../../components/popUp/Modal';
 
 const NotesList = () => {
   const [noteList, setNotesList]  = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [editingNote, setEditingNote] = useState(null);
+  const [selectedNote, setSelectedNote] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
   const getNotes = async () => {
@@ -28,6 +31,7 @@ const NotesList = () => {
 
   const handleEdit = (note) => {
     setEditingNote(note);
+    setIsModalOpen(false);
   };
 
   const handleDelete = async (id) => {
@@ -44,9 +48,10 @@ const NotesList = () => {
       const note = noteList.find(note => note.id === id);
 
       const {title,message} = note;
-
-      const updateNoteList = noteList.map(n => n.id === id ? {...n, archive: !n.archive} : n)
-      setNotesList(updateNoteList)
+      const updatedNote = {...note, archive: !note.archive}
+      const updateNoteList = noteList.map(n => n.id === id ? updatedNote : n)
+      setNotesList(updateNoteList);
+      setSelectedNote(updatedNote);
 
       await axios.put(`http://localhost:4000/notes/${id}`,{title, message, archive: !note.archive})
     } catch (error) {
@@ -59,14 +64,21 @@ const NotesList = () => {
       const note = noteList.find(note => note.id === id);
 
       const {title, message, archive} = note;
-
-      const activeNotes = noteList.map(n => n.id === id ? {...n, active: !n.active} : n)
+      const updatedNote = {...note, active: !note.active};
+      const activeNotes = noteList.map(n => n.id === id ? updatedNote : n)
       setNotesList(activeNotes);
+      setSelectedNote(updatedNote);
 
       await axios.put(`http://localhost:4000/notes/${id}`,{title, message, archive, active: !note.active})
     } catch (error) {
       setError(error.message);
     }
+  }
+
+  const handleNoteClick = (note) => {
+    setSelectedNote(note);
+    setIsModalOpen(true);
+    console.log(note);
   }
 
   const handleSave = () => {
@@ -115,6 +127,7 @@ const NotesList = () => {
           onDelete={handleDelete}
           onArchive={handleArchive}
           onActive={handleActive}
+          onNoteClick = {handleNoteClick}
           />
         ))
           }
@@ -122,13 +135,26 @@ const NotesList = () => {
       <div className='ml-[15px] 2xl:col-span-1'>
       {
         editingNote ? (
-          <Form note={editingNote} onSave={handleSave} onCancel={() => setEditingNote(null)}/>
+          <Form note={editingNote} onSave={handleSave}/>
         ) : (
           <Form onSave={handleSave}/>
         )
       }
       </div>
       </div>
+      {
+        selectedNote && (
+          <Modal 
+          openModal={isModalOpen}
+          closeModal={() => setIsModalOpen(false)}
+          note={selectedNote}
+          onEdit={handleEdit}
+          onDelete={handleDelete}
+          onArchive={handleArchive}
+          onActive={handleActive}
+          />
+        )
+      }
     </div>
   )
 }
