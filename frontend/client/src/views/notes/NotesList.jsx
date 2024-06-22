@@ -1,7 +1,7 @@
 import React,{useState, useEffect} from 'react'
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
 import NotesItem from '../../components/noteItem/NotesItem';
-import Form from '../../components/form/Form';
 import ButtonHome from '../../components/button/ButtonHome';
 import Modal from '../../components/popUp/Modal';
 
@@ -9,16 +9,17 @@ const NotesList = () => {
   const [noteList, setNotesList]  = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [editingNote, setEditingNote] = useState(null);
+  //const [editingNote, setEditingNote] = useState(null);
   const [selectedNote, setSelectedNote] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
   const getNotes = async () => {
     try {
       const response = await axios.get('http://localhost:4000/notes');
         setNotesList(response.data);
-        console.log(response.data);
+        //console.log(response.data);
     } catch (error) {
       setError(error.message);
     } finally{
@@ -30,7 +31,7 @@ const NotesList = () => {
   },[]);
 
   const handleEdit = (note) => {
-    setEditingNote(note);
+    navigate(`/edit/${note.id}`)
     setIsModalOpen(false);
   };
 
@@ -78,33 +79,10 @@ const NotesList = () => {
   const handleNoteClick = (note) => {
     setSelectedNote(note);
     setIsModalOpen(true);
-    console.log(note);
+    //console.log(note);
   }
-
-  const handleSave = () => {
-    setEditingNote(null);
-    setLoading(true);
-    setError(null);
-
-    const fetchNotes = async () => {
-      try {
-        const response = await axios.get('http://localhost:4000/notes');
-        setNotesList(response.data);
-      } catch (error) {
-        setError(error.message);
-      } finally{
-        setLoading(false);
-      }
-    };
-    fetchNotes();
-  }
-  
-  if(loading){
-    return(
-      <div>
-        ...loading
-      </div>
-    )
+  if (loading) {
+    return <div>Loading...</div>;
   }
 
   if (error) {
@@ -112,12 +90,15 @@ const NotesList = () => {
   }
 
   return (
-    <div>
+    <div className='min-h-screen flex flex-col'>
       <div className='flex items-start ml-5'>
         <ButtonHome />
       </div>
-      <div className='grid grid-cols-1 2xl:grid-cols-2 gap-5 sm:flex flex-wrap mt-20'>
-      <div className='2xl:col-span-1'>
+      <div className='w-full h-fit mt-20 mb-10'>
+      <h1 className='font-merienda font-black lg:text-8xl sm:text-3xl'><span className='text-rose-600'>All</span> Notes</h1>
+      </div>
+      <div >
+      <div >
       {
           noteList.map(note =>(
           <NotesItem 
@@ -132,15 +113,7 @@ const NotesList = () => {
         ))
           }
       </div>
-      <div className='ml-[15px] 2xl:col-span-1'>
-      {
-        editingNote ? (
-          <Form note={editingNote} onSave={handleSave}/>
-        ) : (
-          <Form onSave={handleSave}/>
-        )
-      }
-      </div>
+      
       </div>
       {
         selectedNote && (

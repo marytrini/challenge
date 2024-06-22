@@ -5,6 +5,7 @@ import CreateNote from './views/notes/CreateNote';
 import Home from "../src/views/home/Home"
 import ArchivedList from "../src/views/archived/ArchivedList"
 import ActiveList from "../src/views/active/ActiveList"
+import EditNotes from './views/edit/EditNotes';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path='/notes/create' element={<CreateNote />}/>
         <Route path='/archived' element={<ArchivedList />} />
         <Route path='/active' element={<ActiveList />} />
+        <Route path='/edit/:id' element={<EditNotes />} />
       </Routes>
     </div>
   );

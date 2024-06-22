@@ -24,7 +24,7 @@ const Modal = ({openModal, closeModal, note, onEdit, onDelete, onArchive, onActi
         <div className='p-2 bg-white w-10/12 md:w-1/2 lg:1/3 shadow-inner border-e-emerald-600 rounded-lg py-5'>
             <div className='w-full p-3 justify-center items-cente'>
                 <h2 className='font-merienda font-bold text-xl mb-4'>{note.title}</h2>
-                <p className='font-pop text-base mb-4'>{note.message}</p>
+                <p className='font-pop text-base mb-4 text-pretty'>{note.message}</p>
                 <div>
                     <button className='w-8 h-8 rounded-lg border-2 border-solid border-rose-600 font-pop font-semibold hover:bg-rose-400 hover:text-white p-1 mr-3' onClick={handleEdit}><i className="ri-edit-line text-rose-600 hover:text-white"></i></button>
                     <button className='w-8 h-8 rounded-lg border-2 border-solid border-rose-600 font-pop font-semibold hover:bg-rose-400 hover:text-white p-1 mr-3' onClick={handleDelete}><i className="ri-delete-bin-6-line text-rose-600 hover:text-white"></i></button>
