@@ -10,6 +10,16 @@ const getNotes = async (req,res) => {
     }
 }
 
+const getById = async (req,res) => {
+    const {id} = req.params
+    try {
+        const getOne = await Note.findByPk(id);
+        res.status(200).json(getOne);
+    } catch (error) {
+        return res.status(404).json({error: 'Not found!'})
+    }
+}
+
 const createNote = async (req,res) => {
     
     try {
@@ -66,6 +76,7 @@ const deleteNote = async (req,res) => {
 
 module.exports = {
     getNotes,
+    getById,
     createNote,
     updateNote,
     deleteNote,
