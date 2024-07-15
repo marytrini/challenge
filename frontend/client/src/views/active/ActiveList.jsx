@@ -19,7 +19,9 @@ const ActiveList = () => {
   useEffect(() => {
     const getActive = async () => {
       try {
-        const response = await axios.get("http://localhost:4000/active");
+        const response = await axios.get(
+          "https://notes-api-ykpe.onrender.com/active"
+        );
         setActive(response.data);
       } catch (error) {
         setError(error.message);
@@ -38,7 +40,7 @@ const ActiveList = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:4000/notes/${id}`);
+      await axios.delete(`https://notes-api-ykpe.onrender.com/notes/${id}`);
       setActive(active.filter((note) => note.id !== id));
     } catch (error) {
       setError(error.message);
@@ -56,7 +58,7 @@ const ActiveList = () => {
       setActive(updateActiveList);
       setSelectedNote(updatedNote);
 
-      await axios.put(`http://localhost:4000/notes/${id}`, {
+      await axios.put(`https://notes-api-ykpe.onrender.com/notes/${id}`, {
         title,
         message,
         archive,
@@ -78,7 +80,7 @@ const ActiveList = () => {
       setActive(updatedArchivedList);
       setSelectedNote(updatedNote);
 
-      await axios.put(`http://localhost:4000/notes/${id}`, {
+      await axios.put(`https://notes-api-ykpe.onrender.com/notes/${id}`, {
         title,
         message,
         archive: !note.archive,

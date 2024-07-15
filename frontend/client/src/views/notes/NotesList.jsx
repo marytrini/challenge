@@ -18,7 +18,9 @@ const NotesList = () => {
   useEffect(() => {
     const getNotes = async () => {
       try {
-        const response = await axios.get("http://localhost:4000/notes");
+        const response = await axios.get(
+          "https://notes-api-ykpe.onrender.com/notes"
+        );
         setNotesList(response.data);
         //console.log(response.data);
       } catch (error) {
@@ -38,7 +40,7 @@ const NotesList = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:4000/notes/${id}`);
+      await axios.delete(`https://notes-api-ykpe.onrender.com/notes/${id}`);
       setNotesList(noteList.filter((note) => note.id !== id));
     } catch (error) {
       setError(error.message);
@@ -57,7 +59,7 @@ const NotesList = () => {
       setNotesList(updateNoteList);
       setSelectedNote(updatedNote);
 
-      await axios.put(`http://localhost:4000/notes/${id}`, {
+      await axios.put(`https://notes-api-ykpe.onrender.com/notes/${id}`, {
         title,
         message,
         archive: !note.archive,
@@ -77,7 +79,7 @@ const NotesList = () => {
       setNotesList(activeNotes);
       setSelectedNote(updatedNote);
 
-      await axios.put(`http://localhost:4000/notes/${id}`, {
+      await axios.put(`https://notes-api-ykpe.onrender.com/notes/${id}`, {
         title,
         message,
         archive,
