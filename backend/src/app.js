@@ -10,7 +10,7 @@ app.use(morgan("dev"));
 app.use((req, res, next) => {
   res.header(
     "Access-Control-Allow-Origin",
-    "https://notes-ghruyxvqw-marytrinis-projects.vercel.app/"
+    "https://notes-ghruyxvqw-marytrinis-projects.vercel.app"
   );
   res.header("Access-Control-Allow-Credentials", "true");
   res.header(
